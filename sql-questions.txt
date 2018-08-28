@@ -1,0 +1,272 @@
+SQL Interview questions I am asking –
+
+Question	Suppose a field is returning 0 and 1. List down query which will write Failure if 0, success if 1.
+Aspect judged	SQL basics
+Expectation of correct answer	Must.
+
+Question	What will be the output of select 3/5.
+Aspect judged	SQL basics
+Expectation of correct answer	Must. - 0
+
+Question	If I want out of query “select 3/5” as .6 what changes should I make?
+Aspect judged	SQL basics
+Expectation of correct answer	Must. – Select 3.0/5 or Select 3/5.0
+
+Question	Can we use ‘case’ in where clause?
+Aspect judged	SQL basics
+Expectation of correct answer	Must.
+
+Question	Difference between in and exist.
+Aspect judged	SQL basics
+Expectation of correct answer	Must.
+
+Question	Can we use table valued functions in Join?
+Aspect judged	SQL basics
+Expectation of correct answer	Must.
+
+Question	Consider following tables
+
+X	Y
+1	2
+2	4
+3	     6
+4	
+5	
+
+List down most optimized query which can list all records which are in Table X but not in Table Y.
+Aspect judged	Concept of joins, SQL Basics.
+Expectation of correct answer	Must.
+Select #x.* from #x where #x.val not in (Select #y.val from #y)
+Result – 1, 3, 5
+
+Select #x.* from #x
+left join #y on #y.val = #x.val
+where #y.val is null
+Result – 1, 3, 5
+
+
+Select #x.* from #x
+left outer join #y on #y.val = #x.val
+where #y.val is null
+Result – 1, 3, 5
+
+
+Select #y.* from #x
+right outer join #y on #y.val = #x.val
+where #x.val is null
+Result – 6
+
+Select #x.*,#y.* from #x
+full outer join #y on #y.val = #x.val
+where #x.val is null or #y.val is null
+Result –
+val	val
+1	NULL
+3	NULL
+5	NULL
+NULL	6
+
+Question	Query to get second highest value from table.
+Aspect judged	SQL basics
+Expectation of correct answer	Must.
+Select top 1 #x.val from #x where #x.val not in (
+Select max(val) from #x) order by #x.val desc
+
+Question	There is table containing error messages like err1, err2, err3. Write down a query –
+1.	get count of all error messages
+2.	get count of all error messages which value/id is present in another table say X.
+3.	Count of all error messages, month wise.
+4.	Count of error messages having which has been occurred more than 5 times.
+5.	Add additional column which can have value ‘critical’ if count is greater then 10.
+Aspect judged	SQL basics
+Expectation of correct answer	Must.
+
+
+
+Question	A table is having billions of records. Your query is very slow due to huge dataset. How will you improve performance?
+Aspect judged	SQL basics(indexing)
+Expectation of correct answer	Must.
+
+Question	Your table is having a date field. List all records which are having 13:00 as time regardless of date.
+Aspect judged	SQL basics.
+Expectation of correct answer	Must.
+
+Question	How can you find duplicate entries in a table?
+Aspect judged	SQL basics.
+Expectation of correct answer	Must.
+
+Question	If a stored procedure is having 50 if statements, then execution plan will be created on which basis? Will it contain all possible execution paths or some selected execution path?
+Aspect judged	Query/performance optimization.
+Expectation of correct answer	Good to hear
+
+Question	You receive a mail from client from which you can guess column name but you are not very sure which table might contain that column. What steps will you take to know table(s) containing that column?
+Aspect judged	System stored procedure, analytical skills.
+Expectation of correct answer	Must
+
+Question	How can you list/add/edit linked servers?
+Aspect judged	Linked servers are very common and useful in large production environment. Candidate must have played if he has worked with any large production environment.
+Expectation of correct answer	Good to hear.
+
+Question	We want that whenever any data in table is changed, changed data should go in to some other table so that we can keep track of changes made (historical data). What approach will you follow?
+Aspect judged	Practical implementation of concepts triggers in this case.
+Expectation of correct answer	Must
+
+Question	How can you list all tables containing word ‘prod’
+Aspect judged	System tables, analytical skills.
+Expectation of correct answer	Must
+
+Question	Your client came to you and asked for a report containing list of all failed job during last week with reason. How can you generate such report using SQL query?
+Aspect judged	MSDB tables, analytical skills.
+Expectation of correct answer	Good to hear.
+
+
+
+Feedback -
+Communication: Average.
+Business Knowledge: Average. [Not able to elaborate about his own project] Working as JIRA Administrator.
+Technical Skills: 
+SQL Server - 3/10
+Not able to explain Joins. Not aware of Select Case. Not aware of "in" and "exists".
+No hands on experience on Stored procedures. 
+
+
+1.	Is Foreign Key constraints allowed in Table Variables?
+   No.
+2.	Is Transaction Rollbacks possible with Table Variables?
+   No.
+3.	What you cannot do with Table variables?
+a.	Although a table variable is a variable, it cannot be assigned to another table variable.
+b.	Check constraints, default values, and computed columns in the table definition cannot reference user-defined functions.
+c.	You cannot create a named constraint.
+d.	You cannot truncate a table variable.
+e.	You cannot insert explicit values into an identity column (the table variable does not support the SET IDENTITY_INSERT ON).
+f.	
+How do you troubleshoot SQL Server if its running very slow? - First check the processor and memory usage to see that processor is not above 80% utilization and memory not above 40-45% utilization then check the disk utilization using Performance Monitor, Secondly, use SQL Profiler to check for the users and current SQL activities and jobs running which might be a problem. Third would be to run UPDATE_STATISTICS command to update the indexes
+
+
+1.	Can you give me some DBCC command options?(Database consistency check) - DBCC CHECKDB - Ensures that tables in the db and the indexes are correctly linked.and DBCC CHECKALLOC - To check that all pages in a db are correctly allocated. DBCC SQLPERF - It gives report on current usage of transaction log in percentage. DBCC CHECKFILEGROUP - Checks all tables file group for any damage. 
+What is Log Shipping?
+What is the difference between Local and Global Temporary Tables?
+-	Local temp tables exist only for the duration of a connection. A global temp table remains in the DB permanently. When connection closes the data in the global temp table disappears. However, the table definition remains with DB for access when db is opened next time.
+How to implement one – to – one, one – to many, and many to many relationship while designing a table?
+-	one – to – one : single table or two tables with primary key, foreign key.
+-	One – to – many : splitting the data into two tables with primary key and foreign key.
+-	Many – to – many: using mapping table or junction table with keys from both the tables forming the composite primary key in the junction table.
+What are the basic functions of master, msdb, model, tempdb, resource db? – sql 2008
+Resource db – sql system objects such as sys.objects
+Model – template db used in creation of any 
+CTE (Common Table Expression) & advantages.
+Merge Statement.
+Data Compression – Row and page
+
+2.	What is normalization? - Well a relational database is basically composed of tables that contain related data. So the Process of organizing this data into tables is actually referred to as normalization. 
+3.	What is a Stored Procedure? - Its nothing but a set of T-SQL statements combined to perform a single task of several tasks. Its basically like a Macro so when you invoke the Stored procedure, you actually run a set of statements. 
+4.	Can you give an example of Stored Procedure? - sp_helpdb , sp_who2, sp_renamedb are a set of system defined stored procedures. We can also have user defined stored procedures which can be called in similar way.
+5.	What is a trigger? - Triggers are basically used to implement business rules. Triggers is also similar to stored procedures. The difference is that it can be activated when data is added or edited or deleted from a table in a database. 
+6.	What is a view? - If we have several tables in a db and we want to view only specific columns from specific tables we can go for views. It would also suffice the needs of security some times allowing specfic users to see only specific columns based on the permission that we can configure on the view. Views also reduce the effort that is required for writing queries to access specific columns every time. 
+7.	What is an Index? - When queries are run against a db, an index on that db basically helps in the way the data is sorted to process the query for faster and data retrievals are much faster when we have an index. 
+8.	What are the types of indexes available with SQL Server? - There are basically two types of indexes that we use with the SQL Server. Clustered and the Non-Clustered. 
+9.	What is the basic difference between clustered and a non-clustered index? - The difference is that, Clustered index is unique for any given table and we can have only one clustered index on a table. The leaf level of a clustered index is the actual data and the data is resorted in case of clustered index. Whereas in case of non-clustered index the leaf level is actually a pointer to the data in rows so we can have as many non-clustered indexes as we can on the db. 
+10.	What are cursors? - Well cursors help us to do an operation on a set of data that we retreive by commands such as Select columns from table. For example : If we have duplicate records in a table we can remove it by declaring a cursor which would check the records during retreival one by one and remove rows which have duplicate values. 
+11.	When do we use the UPDATE_STATISTICS command? - This command is basically used when we do a large processing of data. If we do a large amount of deletions any modification or Bulk Copy into the tables, we need to basically update the indexes to take these changes into account. UPDATE_STATISTICS updates the indexes on these tables accordingly. 
+12.	Which TCP/IP port does SQL Server run on? - SQL Server runs on port 1433 but we can also change it for better security. 
+13.	From where can you change the default port? - From the Network Utility TCP/IP properties –> Port number.both on client and the server. 
+14.	Can you tell me the difference between DELETE & TRUNCATE commands? - Delete command removes the rows from a table based on the condition that we provide with a WHERE clause. Truncate will actually remove all the rows from a table and there will be no data in the table after we run the truncate command. 
+15.	Can we use Truncate command on a table which is referenced by FOREIGN KEY? - No. We cannot use Truncate command on a table with Foreign Key because of referential integrity. 
+16.	What is the use of DBCC commands? - DBCC stands for database consistency checker. We use these commands to check the consistency of the databases, i.e., maintenance, validation task and status checks. 
+17.	Can you give me some DBCC command options?(Database consistency check) - DBCC CHECKDB - Ensures that tables in the db and the indexes are correctly linked.and DBCC CHECKALLOC - To check that all pages in a db are correctly allocated. DBCC SQLPERF - It gives report on current usage of transaction log in percentage. DBCC CHECKFILEGROUP - Checks all tables file group for any damage. 
+18.	What command do we use to rename a db? - sp_renamedb ‘oldname’ , ‘newname’ 
+19.	Well sometimes sp_reanmedb may not work you know because if some one is using the db it will not accept this command so what do you think you can do in such cases? - In such cases we can first bring to db to single user using sp_dboptions and then we can rename that db and then we can rerun the sp_dboptions command to remove the single user mode. 
+20.	What is the difference between a HAVING CLAUSE and a WHERE CLAUSE? - Having Clause is basically used only with the GROUP BY function in a query. WHERE Clause is applied to each row before they are part of the GROUP BY function in a query. 
+21.	What do you mean by COLLATION? - Collation is basically the sort order. There are three types of sort order Dictionary case sensitive, Dictonary - case insensitive and Binary. 
+22.	What is a Join in SQL Server? - Join actually puts data from two or more tables into a single result set. 
+23.	Can you explain the types of Joins that we can have with Sql Server? - There are three types of joins: Inner Join, Outer Join, Cross Join 
+24.	When do you use SQL Profiler? - SQL Profiler utility allows us to basically track connections to the SQL Server and also determine activities such as which SQL Scripts are running, failed jobs etc.. 
+25.	What is a Linked Server? - Linked Servers is a concept in SQL Server by which we can add other SQL Server to a Group and query both the SQL Server dbs using T-SQL Statements. 
+26.	Can you link only other SQL Servers or any database servers such as Oracle? - We can link any server provided we have the OLE-DB provider from Microsoft to allow a link. For Oracle we have a OLE-DB provider for oracle that microsoft provides to add it as a linked server to the sql server group. 
+27.	Which stored procedure will you be running to add a linked server? - sp_addlinkedserver, sp_addlinkedsrvlogin
+28.	What are the OS services that the SQL Server installation adds? - MS SQL SERVER SERVICE, SQL AGENT SERVICE, DTC (Distribution transac co-ordinator) 
+29.	Can you explain the role of each service? - SQL SERVER - is for running the databases SQL AGENT - is for automation such as Jobs, DB Maintanance, Backups DTC - Is for linking and connecting to other SQL Servers 
+30.	How do you troubleshoot SQL Server if its running very slow? - First check the processor and memory usage to see that processor is not above 80% utilization and memory not above 40-45% utilization then check the disk utilization using Performance Monitor, Secondly, use SQL Profiler to check for the users and current SQL activities and jobs running which might be a problem. Third would be to run UPDATE_STATISTICS command to update the indexes 
+31.	Lets say due to N/W or Security issues client is not able to connect to server or vice versa. How do you troubleshoot? - First I will look to ensure that port settings are proper on server and client Network utility for connections. ODBC is properly configured at client end for connection ——Makepipe & readpipe are utilities to check for connection. Makepipe is run on Server and readpipe on client to check for any connection issues. 
+32.	What are the authentication modes in SQL Server? - Windows mode and mixed mode (SQL & Windows). 
+33.	Where do you think the users names and passwords will be stored in sql server? - They get stored in master db in the sysxlogins table. 
+34.	What is log shipping? Can we do logshipping with SQL Server 7.0 - Logshipping is a new feature of SQL Server 2000. We should have two SQL Server - Enterprise Editions. From Enterprise Manager we can configure the logshipping. In logshipping the transactional log file from one server is automatically updated into the backup database on the other server. If one server fails, the other server will have the same db and we can use this as the DR (disaster recovery) plan. 
+35.	Let us say the SQL Server crashed and you are rebuilding the databases including the master database what procedure to you follow? - For restoring the master db we have to stop the SQL Server first and then from command line we can type SQLSERVER Ã¢â‚¬â€œm which will basically bring it into the maintenance mode after which we can restore the master db. 
+36.	Let us say master db itself has no backup. Now you have to rebuild the db so what kind of action do you take? - (I am not sure- but I think we have a command to do it). 
+37.	What is BCP? When do we use it? - BulkCopy is a tool used to copy huge amount of data from tables and views. But it won’t copy the structures of the same. 
+38.	What should we do to copy the tables, schema and views from one SQL Server to another? - We have to write some DTS packages for it. 
+39.	What are the different types of joins and what dies each do? 
+40.	What are the four main query statements? 
+41.	What is a sub-query? When would you use one? 
+42.	What is a NOLOCK? 
+43.	What are three SQL keywords used to change or set someone’s permissions? 
+44.	What is the difference between HAVING clause and the WHERE clause? 
+45.	What is referential integrity? What are the advantages of it? 
+46.	What is database normalization? 
+47.	Which command using Query Analyzer will give you the version of SQL server and operating system? 
+48.	Using query analyzer, name 3 ways you can get an accurate count of the number of records in a table? 
+49.	What is the purpose of using COLLATE in a query? 
+50.	What is a trigger? 
+51.	What is one of the first things you would do to increase performance of a query? For example, a boss tells you that “a query that ran yesterday took 30 seconds, but today it takes 6 minutes” 
+52.	What is an execution plan? When would you use it? How would you view the execution plan? 
+53.	What is the STUFF function and how does it differ from the REPLACE function? 
+54.	What does it mean to have quoted_identifier on? What are the implications of having it off? 
+55.	What are the different types of replication? How are they used? 
+56.	What is the difference between a local and a global variable? 
+57.	What is the difference between a Local temporary table and a Global temporary table? How is each one used? 
+58.	What are cursors? Name four types of cursors and when each one would be applied? 
+59.	What is the purpose of UPDATE STATISTICS? 
+60.	How do you use DBCC statements to monitor various aspects of a SQL server installation? 
+61.	How do you load large data to the SQL server database? 
+62.	How do you check the performance of a query and how do you optimize it? 
+63.	How do SQL server 2000 and XML linked? Can XML be used to access data? 
+64.	What is SQL server agent? 
+65.	What is referential integrity and how is it achieved? 
+66.	What is indexing? 
+67.	What is normalization and what are the different forms of normalizations? 
+68.	Difference between server.transfer and server.execute method? 
+69.	What id de-normalization and when do you do it? 
+70.	What is better - 2nd Normal form or 3rd normal form? Why? 
+71.	Can we rewrite subqueries into simple select statements or with joins? Example? 
+72.	What is a function? Give some example? 
+73.	What is a stored procedure? 
+74.	Difference between Function and Procedure-in general? 
+75.	Difference between Function and Stored Procedure? 
+76.	Can a stored procedure call another stored procedure. If yes what level and can it be controlled? 
+77.	Can a stored procedure call itself(recursive). If yes what level and can it be controlled.? 
+78.	How do you find the number of rows in a table? 
+79.	Difference between Cluster and Non-cluster index? 
+80.	What is a table called, if it does not have neither Cluster nor Non-cluster Index? 
+81.	Explain DBMS, RDBMS? 
+82.	Explain basic SQL queries with SELECT from where Order By, Group By-Having? 
+83.	Explain the basic concepts of SQL server architecture? 
+84.	Explain couple pf features of SQL server 
+85.	Scalability, Availability, Integration with internet, etc.)? 
+86.	Explain fundamentals of Data ware housing & OLAP? 
+87.	Explain the new features of SQL server 2000? 
+88.	How do we upgrade from SQL Server 6.5 to 7.0 and 7.0 to 2000? 
+89.	What is data integrity? Explain constraints? 
+90.	Explain some DBCC commands? 
+91.	Explain sp_configure commands, set commands? 
+92.	Explain what are db_options used for? 
+93.	What is the basic functions for master, msdb, tempdb databases? 
+94.	What is a job? 
+95.	What are tasks? 
+96.	What are primary keys and foreign keys? 
+97.	How would you Update the rows which are divisible by 10, given a set of numbers in column? 
+98.	If a stored procedure is taking a table data type, how it looks? 
+99.	How m-m relationships are implemented? 
+100.	How do you know which index a table is using? 
+101.	How will oyu test the stored procedure taking two parameters namely first name and last name returning full name? 
+102.	How do you find the error, how can you know the number of rows effected by last SQL statement? 
+103.	How can you get @@error and @@rowcount at the same time? 
+104.	What are sub-queries? Give example? In which case sub-queries are not feasible? 
+105.	What are the type of joins? When do we use Outer and Self joins? 
+106.	Which virtual table does a trigger use? 
+107.	How do you measure the performance of a stored procedure? 
+108.	Questions regarding Raiseerror? 
+109.	Questions on identity? 
+110.	If there is failure during updation of certain rows, what will be the state?
+
+
