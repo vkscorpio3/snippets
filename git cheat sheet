@@ -1,0 +1,220 @@
+Reset & Revert 	- 	https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting/
+Stashing 		- 	https://git-scm.com/docs/git-stash
+					https://git-scm.com/book/en/v2/Git-Tools-Stashing-and-Cleaning
+					https://www.atlassian.com/git/tutorials/git-stash/
+merge 			-	https://easyengine.io/tutorials/git/git-resolve-merge-conflicts/					
+
+#########		GIT Cheat sheet		##############
+
+************* ---Diff--- *************
+# Difference between working and staging
+git diff
+ 
+# Difference between staging and last committed version in repository
+git diff --staged
+
+# Difference between 2 commits
+git diff commid_id_1 commit_id_2
+*If it is easier, you may enter the first four or more characters of the commit ID rather than pasting the entire ID.
+
+# Get diff of a commit from its parent
+git show <commit_id>
+
+# For a list of files to be pushed, run:
+git diff --stat --cached [remote/branch]
+e.g.
+git diff --stat --cached origin/master
+ 
+# For the code diff of the files to be pushed, run:
+git diff [remote repo/branch]
+
+git diff origin/master master
+
+# To see full file paths of the files that will change, run:
+git diff --numstat [remote repo/branch]
+*http://stackoverflow.com/questions/3636914/how-can-i-see-what-i-am-about-to-push-with-git
+
+
+
+************* ---Log / History--- *************
+# Check commit history of a file
+gitk [filename]
+
+# Show commit history
+git log
+git log --oneline
+
+# Give some statistics about which files have changed in each commit
+git log --stat
+
+# See commits that are not pushed to remote
+git log origin/master..master
+
+# or, more generally:
+git log <since>..<until> 
+# git log origin/develop..develop will list any commits that haven't been pushed to the origin's develop branch.
+# The reverse, git log develop..origin/develop will list any commits that are in origin's develop but haven't 
+# been pulled into the local develop yet. If <until> is supposed to be the 
+# current HEAD (the last commit on the checked out branch), then it can simply be omitted. 
+# The two dots are still required though: git log origin/master.. (same as git log origin/master..HEAD).
+
+
+
+
+************* ------ Cleanup ----- *************
+# ~2 means up two levels in the hierarchy, via the first parent if a commit has more than one parent
+# ^2 means one level up in the hierarchy, via the second parent where a commit has more than one parent (i.e. because it's a merge)
+
+# Shows what will be deleted
+git clean -n
+
+# Remove untracked files and directories (e.g., new files, generated files)
+git clean -fd
+
+# Reset the repository to the state of last commit - discards any uncommitted 
+# changes (both from staged snapshot and the working directory) - it will not remove untracked files
+git reset --hard HEAD
+
+# Move HEAD one level up (and undoes the commit) but leaves your files alone both in staged and working directory.
+git reset --soft HEAD~1
+
+# This leaves your working tree (the state of your files on disk) unchanged but undoes the commit and leaves the 
+# changes you committed unstaged (so they'll appear as "Changes not staged for commit" in git status and you'll 
+# need to add them again before committing)
+git reset HEAD~
+
+--soft – The staged snapshot and working directory are not altered in any way.
+--mixed – default option - The staged snapshot is updated to match the specified commit, but the working directory is not affected.
+--hard – The staged snapshot and the working directory are both updated to match the specified commit.
+
+# To reset to whatever the origin was at
+git reset --hard origin/master
+
+# Remove file from staging area. The changes file contains will still be present in the working directory.
+git reset HEAD file_name
+
+# Makes foo.py in the working directory match the one from the 2nd-to-last commit
+git checkout HEAD~2 foo.py
+
+# Tip - git revert should be used to undo changes on a public branch, 
+# and git reset should be reserved for undoing changes on a private branch.
+# Think git revert as a tool for undoing committed changes, 
+# while git reset HEAD is for undoing uncommitted changes.
+
+
+
+************* ---Branching / Check Out--- *************
+# Checking out (move to / restore) older / previous version of branch
+git checkout commit_id
+*use git log to check commit_ids and this operation will lead to detached head state
+
+# Checking out previous commit of a file
+git checkout commit_id -- path/to/file.txt
+or
+git checkout 'master@{7 days ago}' -- path/to/file.txt
+
+*This will not alter HEAD, it will just overwrite the local file path/to/file.txt
+
+# Restore a file foo to the state it is in the index
+git checkout -- path/to/file
+
+
+
+
+
+# Get out of Detached Head
+git checkout branch_name
+
+# What to do with commit made in a detached head - commit them in the detached mode and after that move to a temporary 
+# branch to integrate later in master
+git commit -m "....."
+git branch my-temporary-work
+git checkout master
+git merge my-temporary-work
+
+#or
+git commit -m "..." #remember commit hash
+git checkout master
+git cherry-pick 1fe56ad
+ 
+#Move back to HEAD
+git checkout master
+
+# Show current branches
+git branch    # local
+git branch -a # all
+git branch -r # remote
+
+# Create a branch
+git branch <branch_name>
+ 
+# Switch to / checkout a branch
+git checkout <branch_name>
+
+# Create and checkout new branch
+git checkout -b new_branch_name
+
+# Get branching info (what branches are currently tracking other branches)
+git branch -vv
+
+# Remote-tracking branches are references to the state of remote branches. 
+# They’re local references that you can’t move; they’re moved automatically 
+# for you whenever you do any network communication. Remote-tracking branches 
+# act as bookmarks to remind you where the branches in your remote repositories 
+# were the last time you connected to them.
+
+# Remove a current tracking relationship
+git branch --unset-upstream
+
+# Creating a local version of an existing remote branch
+git fetch origin
+git checkout feature
+
+# Get a full list of remote references explicitly 
+git remote show origin
+
+# checkout by date
+git checkout 'master@{1979-02-26 18:30:00}'
+
+************* ---Configuration--- *************
+git config --list
+
+# Get history of how your HEAD and branch pointers where moved in the past.
+git reflog
+
+# To get colored diff output, run 
+git config --global color.ui auto
+
+
+
+************* ---Checking In / push--- *************
+
+# Add file to staging area
+git add file_name
+ 
+# Commit file
+git commit -m <message>
+
+git pull origin
+
+git push origin master
+
+git fetch origin
+
+
+#########
+http://stackoverflow.com/questions/22053757/git-checkout-another-branch-when-there-are-uncommitted-changes-on-the-current
+You may switch branches with uncommitted changes in the work-tree if and only if said switching does not require clobbering those changes.
+
+That is—and please note that this is still simplified; there are some extra-difficult corner cases with staged git adds, git rms and such—suppose you are on branch1. Without -f, git checkout branch2 would have to do this:
+
+For every file that is in branch1 and not in branch2, remove that file.
+For every file that is in branch2 and not in branch1, create that file (with appropriate contents).
+For every file that is in both branches, if the version in branch2 is different, update the working tree version.
+Each of these steps could clobber something in your work-tree:
+
+Removing a file is "safe" if the version in the work-tree is the same as the committed version in branch1; it's "unsafe" if you've made changes.
+Creating a file the way it appears in branch2 is "safe" if it does not exist now.1 It's "unsafe" if it does exist now but has the "wrong" contents.
+And of course, replacing the work-tree version of a file with a different version is "safe" if the work-tree version is already committed to branch1.
+
+
