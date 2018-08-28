@@ -224,3 +224,93 @@ Builder Vs. Factory Vs. Decorator
 4) Patterns like builder and factory(and abstract factory) are used in creation of objects. And the patterns like decorator (also called as structural design patterns) are used for extensibility or to provide structural changes to already created objects.
 
 5) If we do not want to expose the attributes and want the creation of a certain pizza “magically” inside based on some attributes, factory Pattern could be used.
+
+
+http://www.developer.com/java/data/exploring-the-queue-interface-in-java.html
+https://confluence.dts.fm.rbsgrp.net/display/BLDCLDDDOC/DTS+TeamCity+On-boarding
+http://www.developer.com/java/data/java-nio.2-file-handling.html
+http://www.developer.com/java/data/understanding-java-nested-classes-and-java-inner-classes.html
+https://anirudhbhatnagar.com/category/design-patterns/
+
+-- Design Pattern tutorials --
+https://anirudhbhatnagar.com/2014/08/19/pizza-problem-builder-vs-decorator/
+--- Blogs ---
+http://p--np.blogspot.in/
+https://en.wikipedia.org/wiki/Magic_formula_investing
+
+
+--- Gradle ---
+http://www.drdobbs.com/jvm/why-build-your-java-projects-with-gradle/240168608?pgno=3
+
+
+--- Quora ---
+http://www-igm.univ-mlv.fr/~lecroq/string/examples/exp14.html
+
+
+--- Boyer-Moore ---
+http://www-igm.univ-mlv.fr/~lecroq/string/examples/exp14.html
+
+--- Equal and Hashcode ---
+http://javarevisited.blogspot.in/2013/08/10-equals-and-hashcode-interview.html
+http://eclipsesource.com/blogs/2012/09/04/the-3-things-you-should-know-about-hashcode/
+http://stackoverflow.com/questions/16400711/two-unequal-objects-with-same-hashcode
+
+---- Hibernate ----
+open session in view (OSIV) pattern
+locks in hibernate
+http://www.laliluna.de/jpa-hibernate-guide/ch01.html
+http://www.codeproject.com/Articles/114262/ways-of-doing-locking-in-NET-Pessimistic-and-opt#What%20is%20Optimistic%20locking
+http://www.javacodegeeks.com/2012/11/jpahibernate-version-based-optimistic-concurrency-control.html
+
+--- Design Patterns ---
+http://www.codeproject.com/Articles/39166/Using-the-Chain-Of-Command-Design-Pattern-Concepts
+http://www.javaworld.com/article/2077569/core-java/java-tip-68--learn-how-to-implement-the-command-pattern-in-java.html
+
+
+----- Mocking ----
+http://stackoverflow.com/questions/8517940/mocking-internal-instantiated-object
+http://stackoverflow.com/questions/7440946/how-to-write-a-ut-to-mock-an-internal-object-in-one-method
+http://www.codeproject.com/Articles/516360/Mockito-a-great-mock-framework-for-Java-developmen
+--- StackOverflow ---
+http://stackoverflow.com/questions/3564139/how-to-override-the-final-equals-method-in-java-enums
+http://stackoverflow.com/questions/949678/ant-is-using-wrong-java-version
+http://stackoverflow.com/questions/1582161/how-does-a-preparedstatement-avoid-or-prevent-sql-injection
+	
+--- Wikipedia ---
+https://en.wikipedia.org/wiki/Microservices
+
+---- Oracle ----
+http://stackoverflow.com/questions/5898243/some-basic-oracle-concepts
+
+
+---- Remote Debugging ----
+http://www.onjava.com/pub/a/onjava/2005/08/31/eclipse-jboss-remote-debug.html?page=6
+https://confluence.sakaiproject.org/display/BOOT/Debugging+Tomcat+Remotely+Using+Eclipse
+
+--- Generics ---
+That is because, until Java 7, generics do not fully support target typing, so you need to help the compiler a little with what is called a type witness like in ConnectionHelper.<List<ClientCoverageCRU>>.
+http://stackoverflow.com/questions/21297979/odd-method-call-in-java-using-a-dot-operator-to-access-a-generic-list
+http://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html
+http://www.angelikalanger.com/GenericsFAQ/FAQSections/TypeParameters.html#FAQ106
+
+https://expertmile.com/arti.php?article_id=1105
+
+
+https://www.careercup.com/page?pid=system-design-interview-questions
+https://www.careercup.com/question?id=5747801813155840
+https://www.careercup.com/question?id=5690212731584512
+
+
+https://javainterviews.scribbleit.in/question-bank/design-metro-smart-card-system-for-delhi-using-java/p/AnPDBA
+http://interviewquestionsatsapientforjava.blogspot.in/2015/07/java-interview-questions-at-sapient-for.html
+http://bootsnipp.com/
+https://vikaspandeyjavatea.wordpress.com/2014/08/04/metro-card-management-system/
+
+http://www.developer.com/java/data/exploring-the-queue-interface-in-java.html
+https://confluence.dts.fm.rbsgrp.net/display/BLDCLDDDOC/DTS+TeamCity+On-boarding
+http://www.developer.com/java/data/java-nio.2-file-handling.html
+http://www.developer.com/java/data/understanding-java-nested-classes-and-java-inner-classes.html
+https://anirudhbhatnagar.com/category/design-patterns/
+
+-- Design Pattern tutorials --
+https://anirudhbhatnagar.com/2014/08/19/pizza-problem-builder-vs-decorator/
