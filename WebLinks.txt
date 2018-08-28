@@ -314,3 +314,48 @@ https://anirudhbhatnagar.com/category/design-patterns/
 
 -- Design Pattern tutorials --
 https://anirudhbhatnagar.com/2014/08/19/pizza-problem-builder-vs-decorator/
+
+
+
+- When there is an obstacle, or when a Java based Web application is running much slower than expected, we need to use thread dumps.
+
+- Thread contention is a status in which one thread is waiting for a lock, held by another thread, to be lifted. Different threads frequently access shared resources on a web application. For example, to record a log, the thread trying to record the log must obtain a lock and access the shared resources.
+
+- Deadlock is a special type of thread contention, in which two or more threads are waiting for the other threads to complete their tasks in order to complete their own tasks.
+
+
+----- Concurrency In Practice -----
+
+- The synchronization policy defines how an object coordinates access to its state without violating its invariants or post 
+conditions. It specifies what combination of immutability, thread confinement, and locking is used to maintain thread 
+safety, and which variables are guarded by which locks.
+
+
+------ TCP -------
+Companies are facing an interesting challenge with regard to their wide-area-network (WAN) planning. Three out of four organizations report no growth in budgets, and overall planned budget growth is only 5% to 8%. Budgets are essentially flat. Yet, nearly 50% of organizations project significant increases in bandwidth consumption.
+
+
+
+
+More on TCP optimization
+
+Learn more about WAN bandwidth optimization techniques.
+
+Read this article on tuning TCP.
+
+Download a free book chapter on TCP IP protocol and application performance.
+
+One way companies can address this challenge is to optimize what they already have. A lot of the traffic flowing over networks is still based on TCP/IP. TCP, or Transmission Control Protocol, provides reliable, ordered delivery of packets and is the protocol used by most Web applications, email and file transfers. Unfortunately, TCP has blunt flow-management algorithms: If the network or the receiver can't handle the speed at which the sender is working, as indicated by packet loss, timeouts or an excess of out-of-order packets, the network flow will drop to half that rate. Speeds ramp up again, but more slowly than the first time.
+
+So, performance of TCP applications that generate long packet flows, such as large file transfers, can suffer hugely over WAN connections: The longer transit times on such links mean the sender can remain ignorant of degradations in performance for a longer time, and then react with precipitous slowdowns when it catches up. TCP optimization mitigates these problems, either by helping the network avoid packet drops and out-of-order delivery or by tinkering with the TCP flows directly and adjusting drop-back/ramp-up behaviors.
+
+
+---
+
+The three tips below help IT managers and engineers optimize TCP:
+
+Tip 1: Stop thinking about bandwidth, get smart about congestion. The problem isn't necessarily about how much data needs to get from Point A to Point B, but rather it's about how quickly all the individual, non-cooperating senders and receivers try to cram their data through. That fast ramp up/fast drop down/slower ramp up/fast drop down behavior makes applications in uncongested networks speedy, but it increases the chance of congestion each time a new sender joins the party. Optimizers that can change ramping behaviors to slow the initial ramp up or decrease the size of the initial drop down can prevent congestion in the first place and allow a more graceful response to the threat of it by preemptively slowing transmissions as new traffic streams begin to ramp up.
+
+Tip 2: Think about network priority. Traffic shaping optimizers aim to ensure that an organization has control over how bandwidth is consumed. Control can be positive, guaranteeing that certain applications, devices or users get bandwidth; or negative, limiting the bandwidth that specific users, devices or applications receive. Using them to optimize TCP traffic requires institutional discussion of what kinds of traffic and which applications and users have priority claims on available resources in times of congestion.
+
+Tip 3: Keep TCP out of the way. Today, an increasing amount of the most important traffic -- video conferencing, VoIP data -- is not using TCP/IP; it's using User Datagram Protocol over IP (UDP/IP) instead. And, unfortunately, UDP doesn't have the flow control mechanisms TCP does, which makes TCP susceptible to robust optimization. UDP senders just send packets and the receiver gets what it gets. Given that real-time communications traffic based on UDP is often considered very high priority by the enterprise, TCP optimizers can help by keeping TCP traffic out of the way of the UDP streams and mitigating further congestion problems for the TCP traffic caused by squeezing it through smaller portions of the available pipes to allow UDP traffic priority. (Optimizers that work at the IP level can do more, of course.)
