@@ -211,3 +211,16 @@ https://www.quora.com/What-are-some-of-the-use-cases-of-Apache-Storm
 http://www.infoworld.com/article/2854894/application-development/spark-and-storm-for-real-time-computation.html
 https://www.infoq.com/articles/apache-kafka
 
+
+https://zeroturnaround.com/rebellabs/profiling-restful-services-with-xrebel/
+Builder Vs. Factory Vs. Decorator
+
+1) Factory can be used to create different implementation of same interface but Builder is tied up with its Container class and only returns object of Outer class.
+
+2)  Decorator Pattern is used to add or remove additional functionalities or responsibilities from the object dynamically without impacting the original object. There is no restriction of freezing the object until all its features are added
+
+3) The builder exposes the attributes the generated object should have, but hides how to set them.
+
+4) Patterns like builder and factory(and abstract factory) are used in creation of objects. And the patterns like decorator (also called as structural design patterns) are used for extensibility or to provide structural changes to already created objects.
+
+5) If we do not want to expose the attributes and want the creation of a certain pizza “magically” inside based on some attributes, factory Pattern could be used.
